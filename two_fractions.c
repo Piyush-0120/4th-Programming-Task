@@ -1,6 +1,5 @@
 //WAP to find the sum of two fractions.
 #include <stdio.h>
-#include <stdio.h>
 struct frac
 {
     float a;
