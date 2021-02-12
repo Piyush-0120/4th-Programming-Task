@@ -34,12 +34,17 @@ Frac compute(Frac res,Frac f)
     sum.b = l;
     return sum;
 }
-void output(Frac res)
+void simplified(Frac res)
 {
     int g=gcd(res.a,res.b);
     res.a/=g;
     res.b/=g;
-    printf("The simplified fraction is: %d/%d",res.a,res.b);
+    output(res);
+
+}
+void output(Frac res)
+{
+        printf("The simplified fraction is: %d/%d",res.a,res.b);
 }
 int main(void)
 {   
@@ -47,7 +52,8 @@ int main(void)
     f1=input();
     f2=input();
     res=compute(f1,f2);
-    output(res);
+    simplified(res);
     return 0;
 }
+
 
