@@ -10,6 +10,7 @@ int gcd(int,int);
 int lcm(int,int);
 Frac input();
 Frac compute(Frac,Frac);
+void simplified(Frac);
 void output(Frac);
 
 int gcd(int a, int b)
@@ -40,12 +41,16 @@ Frac compute(Frac res,Frac f)
     sum.b = l;
     return sum;
 }
-void output(Frac res)
+void simplified(Frac res)
 {
     int g=gcd(res.a,res.b);
     res.a/=g;
     res.b/=g;
-    printf("The simplified fraction is: %d/%d",res.a,res.b);
+    output(res);    
+}
+void output(Frac res)
+{
+   printf("The simplified fraction is: %d/%d",res.a,res.b);  
 }
 int main(void)
 {
@@ -61,6 +66,7 @@ int main(void)
         else
             res=compute(res,f);
     }
-    output(res);
+    simplified(res);
     return 0;
 }
+
