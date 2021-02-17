@@ -34,13 +34,12 @@ Frac compute(Frac res,Frac f)
     sum.b = l;
     return sum;
 }
-void simplified(Frac res)
+Frac simplified(Frac res)
 {
     int g=gcd(res.a,res.b);
     res.a/=g;
     res.b/=g;
-    output(res);
-
+    return res;
 }
 void output(Frac res)
 {
@@ -52,8 +51,8 @@ int main(void)
     f1=input();
     f2=input();
     res=compute(f1,f2);
-    simplified(res);
+    res = simplified(res);
+    output(res);
     return 0;
 }
-
 
