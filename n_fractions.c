@@ -1,4 +1,3 @@
-//WAP to find the sum of n fractions.
 #include <stdio.h>
 struct frac
 {
@@ -10,7 +9,7 @@ int gcd(int,int);
 int lcm(int,int);
 Frac input();
 Frac compute(Frac,Frac);
-void simplified(Frac);
+Frac simplified(Frac);
 void output(Frac);
 
 int gcd(int a, int b)
@@ -41,12 +40,12 @@ Frac compute(Frac res,Frac f)
     sum.b = l;
     return sum;
 }
-void simplified(Frac res)
+Frac simplified(Frac res)
 {
     int g=gcd(res.a,res.b);
     res.a/=g;
     res.b/=g;
-    output(res);    
+    return res;    
 }
 void output(Frac res)
 {
@@ -66,7 +65,7 @@ int main(void)
         else
             res=compute(res,f);
     }
-    simplified(res);
+    res = simplified(res);
+    output(res);
     return 0;
 }
-
