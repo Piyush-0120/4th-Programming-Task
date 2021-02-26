@@ -12,10 +12,17 @@ int gcd(int a, int b)
         return b;
     return gcd(b % a, a);
 }
-
+int GCD(int n, int d) {
+	int g;
+	for (int i = 1; i <= n && i <= d; i++) {
+		if (n % i == 0 && d % i == 0)
+			g = i;
+	}
+	return g;
+}
 int lcm(int a,int b)
 {
-    return ((a*b)/gcd(a,b)); 
+    return ((a*b)/GCD(a,b)); 
 }
 Frac input()
 {
@@ -26,17 +33,17 @@ Frac input()
     scanf("%d",&f.b);
     return f;
 }
-Frac compute(Frac res,Frac f)
+Frac compute(Frac f1,Frac f2)
 {
     Frac sum;
-    int l = lcm(res.b,f.b);
-    sum.a = res.a*(l/res.b)  + f.a*(l/f.b);
+    int l = lcm(f1.b,f2.b);
+    sum.a = f1.a*(l/f1.b)  + f2.a*(l/f2.b);
     sum.b = l;
     return sum;
 }
 Frac simplified(Frac res)
 {
-    int g=gcd(res.a,res.b);
+    int g=GCD(res.a,res.b);
     res.a/=g;
     res.b/=g;
     return res;
@@ -55,4 +62,5 @@ int main(void)
     output(res);
     return 0;
 }
+
 
