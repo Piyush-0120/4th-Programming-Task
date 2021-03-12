@@ -31,7 +31,8 @@ Student input_one_student(int n)
 Gradebook input_n_student()
 {
 	Gradebook g;
-	scanf("%s",g.courseName);
+	scanf("\n");
+	scanf("%[^\n]%*c",g.courseName);
 	scanf("%d %d",&g.totalStudents,&g.totalScores);
 	for(int i=0;i<g.totalScores;i++)
 	{
