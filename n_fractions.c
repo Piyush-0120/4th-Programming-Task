@@ -5,12 +5,6 @@ struct frac
     int b;
 };
 typedef struct frac Frac;
-int gcd(int,int);
-int lcm(int,int);
-Frac input();
-Frac compute(Frac,Frac);
-Frac simplified(Frac);
-void output(Frac);
 
 int gcd(int a, int b)
 {
@@ -23,16 +17,17 @@ int lcm(int a,int b)
 {
     return ((a*b)/gcd(a,b)); 
 }
-Frac input()
+void input(int n,Frac f[n])
 {
-    Frac f;
-    printf("Enter numerator:");
-    scanf("%d",&f.a);
-    printf("Enter denominator:");
-    scanf("%d",&f.b);
-    return f;
+    for(int i=0;i<n;i++)
+    {
+        printf("Enter numerator %d:",i+1);
+        scanf("%d",&f[i].a);
+        printf("Enter denominator %d:",i+1);
+        scanf("%d",&f[i].b);    
+    }
 }
-Frac compute(Frac res,Frac f)
+Frac compute_one_fraction(Frac res,Frac f)
 {
     Frac sum;
     int l = lcm(res.b,f.b);
@@ -40,32 +35,38 @@ Frac compute(Frac res,Frac f)
     sum.b = l;
     return sum;
 }
-Frac simplified(Frac res)
+void compute_n_fraction(int n,Frac f[],Frac *res)
 {
-    int g=gcd(res.a,res.b);
-    res.a/=g;
-    res.b/=g;
-    return res;    
+    for(int i=0;i<n;i++)
+    {
+        if(i==0)
+            *res=f[i];
+        else
+            *res=compute_one_fraction(*res,f[i]);
+    }
+    
+    int g=gcd(res->a,res->b);
+    res->a/=g;
+    res->b/=g;
 }
-void output(Frac res)
+
+void output(int n,Frac f[n],Frac res)
 {
-   printf("The simplified fraction is: %d/%d",res.a,res.b);  
+   for(int i=0;i<n-1;i++)
+   {
+       printf("%d/%d + ",f[i].a,f[i].b);
+   }
+   printf("%d/%d ",f[n-1].a,f[n-1].b);
+   printf("is %d/%d ",res.a,res.b);
 }
 int main(void)
 {
     int n;
-    Frac res,f;
     printf("Enter the value of n:");
     scanf("%d",&n);
-    for(int i=0;i<n;i++)
-    {
-        f=input();
-        if(i==0)
-            res=f;
-        else
-            res=compute(res,f);
-    }
-    res = simplified(res);
-    output(res);
+    Frac res,f[n];
+    input(n,f);
+    compute_n_fraction(n,f,&res);
+    output(n,f,res);
     return 0;
 }
